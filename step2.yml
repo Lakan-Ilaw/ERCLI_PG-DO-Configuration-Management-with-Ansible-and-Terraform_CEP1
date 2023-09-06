@@ -1,6 +1,6 @@
 ---
 - name: Deploy and Restart Web Container
-  hosts: web_server_1
+  hosts: remote_web_servers
   become: yes
   become_user: root
   tasks:

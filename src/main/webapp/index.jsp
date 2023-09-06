@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simplilearn : DevOps</title>
+  <title>Simplilearn:DevOps Course End Project</title>
   <style>
     body {
       margin: 0;
@@ -61,10 +61,10 @@
 
 <body>
   <div class="container">
-    <h1>HELLO! HOW ARE YOU?</h1>
-    <h2>This is Elmer</h2>
-    <p>Good Bye!</p>
-    <p><a href="#">Visit Homepage</a></p>
+    <h2>CI/CD Deployment Using Ansible CM Tool</h2>
+    <h2>Course-end Project 1</h2>
+    <p>Submitted by: Elmer Richard C. Lakan-Ilaw</p>
+    <p><a href="#">Home</a></p>
   </div>
 </body>
 

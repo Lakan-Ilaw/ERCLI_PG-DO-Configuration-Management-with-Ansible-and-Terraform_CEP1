@@ -12,7 +12,7 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav pull-right">
-          <li role="presentation" class="active"><a href="#">Home</a></li>
+          <li role="presentation" class="active"><a href="#">HOME</a></li>
           <li role="presentation"><a href="#about">About</a></li>
           <li role="presentation"><a href="#portfolio">Portfolio</a></li>
           <li role="presentation"><a href="#contact">Contact</a></li>

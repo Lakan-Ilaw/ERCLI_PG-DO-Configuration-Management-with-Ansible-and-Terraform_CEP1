@@ -12,10 +12,11 @@
       async: 60 
       poll: 0
       ignore_errors: yes
+      register: shutdown_job
 
     - name: Wait for Tomcat to stop
       async_status:
-        jid: "{{ ansible_job_id }}"
+        jid: "{{ shutdown_job.ansible_job_id }}"
       register: job_result
       until: job_result.finished
       retries: 10

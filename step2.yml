@@ -2,10 +2,27 @@
 - name: Deploy and Restart Web Container
   hosts: web_server_1
   become: yes
+  become_user: root
   tasks:
+    - name: Check if Tomcat directory exists
+      stat:
+        path: /opt/tomcat
+      register: tomcat_dir
+
+    - name: Download and Install Tomcat
+      ansible.builtin.unarchive:
+        src: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.13/bin/apache-tomcat-10.1.13.tar.gz
+        dest: /opt/
+        remote_src: yes
+      when: tomcat_dir.stat.exists == False
+      
+    - name: Rename Tomcat directory
+      command: mv /opt/apache-tomcat-10.1.13 /opt/tomcat
+      when: tomcat_dir.stat.exists == False
+      
     - name: Copy .war file to the remote server
       copy:
-        src: /home/labsuser/TEST_FOLDER/Deploy/target/java-tomcat-maven-example.war
+        src: /home/labsuser/PG-DO_Configuration-Management-with-Ansible-and-Terraform/CEP-1/Deploy/target/simplilearn-pgdo-course2-cep1.war
         dest: /opt/tomcat/webapps/
 
     - name: Stop Tomcat

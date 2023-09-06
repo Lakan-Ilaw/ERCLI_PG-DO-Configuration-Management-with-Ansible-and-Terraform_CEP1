@@ -23,5 +23,5 @@
       retries: 10
       delay: 5
 
-    - name: Start Tomcat
-      command: /opt/tomcat/bin/startup.sh
+    - name: Start Tomcat using nohup
+      shell: "nohup /opt/tomcat/bin/startup.sh &"

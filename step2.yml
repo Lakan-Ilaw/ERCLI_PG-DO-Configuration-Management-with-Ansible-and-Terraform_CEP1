@@ -1,0 +1,25 @@
+---
+- name: Deploy and Restart Web Container
+  hosts: web_server_1
+  tasks:
+    - name: Copy .war file to the remote server
+      copy:
+        src: /home/labsuser/TEST_FOLDER/Deploy/target/java-tomcat-maven-example.war
+        dest: /opt/tomcat/webapps/
+
+- name: Stop Tomcat
+  command: /opt/tomcat/bin/shutdown.sh
+  async: 60 
+  poll: 0
+  ignore_errors: yes
+
+- name: Wait for Tomcat to stop
+  async_status:
+    jid: "{{ ansible_job_id }}"
+  register: job_result
+  until: job_result.finished
+  retries: 10
+  delay: 5
+
+- name: Start Tomcat
+  command: /opt/tomcat/bin/startup.sh

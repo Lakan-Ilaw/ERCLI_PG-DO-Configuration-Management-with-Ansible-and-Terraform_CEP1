@@ -1,0 +1,49 @@
+---
+- name: Run Maven Build
+  hosts: master
+  become: yes
+  vars:
+    git_repo_url: https://github.com/Lakan-Ilaw/java-tomcat-sample.git
+    project_directory: /home/labsuser/TEST_FOLDER/Deploy/
+    
+  tasks:
+    - name: Verify Maven
+      apt:
+        name: maven
+        update_cache: true
+        
+    - name: Check if the project directory exists
+      stat:
+        path: "{{ project_directory }}"
+      register: project_dir
+      
+    - name: Zip the project directory with a timestamp
+      archive:
+        path: "{{ project_directory }}"
+        dest: "/tmp/project_{{ ansible_date_time.epoch }}.zip"
+      when: project_dir.stat.exists
+
+    - name: Clone the Git repository
+      git:
+        repo: "{{ git_repo_url }}"
+        dest: "{{ project_directory }}"
+
+    - name: Run Maven Goals
+      command: mvn "{{ item }}"
+      args:
+        chdir: "{{ project_directory }}"
+      loop:
+        - test
+        - pmd:pmd
+        - verify
+        - clean
+        - install
+      register: maven_result
+        
+    - name: Display Error Message
+      debug:
+        msg: "An error has been found on {{ item.item }} step."
+      loop: "{{ maven_result.results }}"
+      loop_control:
+        loop_var: item
+      when: item.rc != 0

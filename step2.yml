@@ -1,6 +1,7 @@
 ---
 - name: Deploy and Restart Web Container
   hosts: web_server_1
+  become: yes
   tasks:
     - name: Copy .war file to the remote server
       copy:

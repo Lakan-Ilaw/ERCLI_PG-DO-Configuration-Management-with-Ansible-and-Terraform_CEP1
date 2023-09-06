@@ -1,13 +1,13 @@
 ---
-- name: Run Maven Build
+- name: Run Maven Build via Ansible
   hosts: master
   become: yes
   vars:
-    git_repo_url: https://github.com/Lakan-Ilaw/java-tomcat-sample.git
-    project_directory: /home/labsuser/TEST_FOLDER/Deploy/
+    git_repo_url: https://github.com/Lakan-Ilaw/PG_DO_Course2_CEP1.git
+    project_directory: /home/labsuser/PG-DO_Configuration-Management-with-Ansible-and-Terraform/CEP-1/Deploy/
     
   tasks:
-    - name: Verify Maven
+    - name: Verify Maven Installation
       apt:
         name: maven
         update_cache: true
@@ -17,17 +17,12 @@
         path: "{{ project_directory }}"
       register: project_dir
       
-    - name: Zip the project directory with a timestamp
-      archive:
-        path: "{{ project_directory }}"
-        dest: "/tmp/project_{{ ansible_date_time.epoch }}.zip"
+    - name: Zip the project directory with a timestamp and delete the original directory
+      command: |
+        zip -r "/tmp/project_{{ ansible_date_time.epoch }}.zip" "{{ project_directory }}" &&
+        rm -rf "{{ project_directory }}"
       when: project_dir.stat.exists
 
-    - name: Delete the project directory
-      file:
-        path: "{{ project_directory }}"
-        state: absent
-      when: project_dir.stat.exists
 
     - name: Clone the Git repository
       git:

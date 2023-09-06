@@ -23,6 +23,12 @@
         dest: "/tmp/project_{{ ansible_date_time.epoch }}.zip"
       when: project_dir.stat.exists
 
+    - name: Delete the project directory
+      file:
+        path: "{{ project_directory }}"
+        state: absent
+      when: project_dir.stat.exists
+
     - name: Clone the Git repository
       git:
         repo: "{{ git_repo_url }}"

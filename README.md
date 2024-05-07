@@ -1,3 +1,10 @@
+**PROBLEM STATEMENT:**
+
+![image](https://github.com/Lakan-Ilaw/ERCLI_PG-DO-Configuration-Management-with-Ansible-and-Terraform_CEP1/assets/134827117/ed22f7bb-ef19-4c9c-aaeb-7b8fc73bb8dd)
+
+# **Solution and Documentation:**
+[[Lakan-Ilaw]CICD Deployment Using Ansible CM Tool.pdf](https://github.com/Lakan-Ilaw/ERCLI_PG-DO-Configuration-Management-with-Ansible-and-Terraform_CEP1/files/15227917/Lakan-Ilaw.CICD.Deployment.Using.Ansible.CM.Tool.pdf)
+
 # java-tomcat-maven-example
 
 This is an example ready-to-deploy java web application built for Tomcat using Maven and webapp-runner.
